@@ -11,3 +11,16 @@ RUN apt-get update && apt-get install -y \
 	&& docker-php-ext-install mysql \
         && docker-php-ext-install mysqli \
         && docker-php-ext-install pdo_mysql
+        && set -ex \
+        && { \
+                echo 'zend_extension=opcache.so'; \
+        } | tee /usr/local/etc/php/conf.d/opcache.ini \
+        && { \
+                echo 'upload_max_filesize = 5M'; \
+        } | tee /usr/local/etc/php/conf.d/upload.ini \
+        && { \
+                echo "date.timezone = 'PRC'"; \
+        } | tee /usr/local/etc/php/conf.d/timezone.ini \
+        && { \
+                echo "memory_limit = '512M'"; \
+        } | tee /usr/local/etc/php/conf.d/memorylimit.ini \
