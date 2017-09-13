@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
                 echo "date.timezone = 'PRC'"; \
         } | tee /usr/local/etc/php/conf.d/timezone.ini \
         && { \
-                echo "memory_limit = '256'"; \
+                echo "memory_limit = '256M'"; \
         } | tee /usr/local/etc/php/conf.d/memorylimit.ini \
         && { \
                 echo "display_errors = off"; \
