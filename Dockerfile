@@ -1,4 +1,5 @@
 FROM php:5.6-fpm
+COPY ./www.conf /usr/local/etc/php-fpm.d/www.conf
 RUN apt-get update && apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
@@ -22,5 +23,10 @@ RUN apt-get update && apt-get install -y \
                 echo "date.timezone = 'PRC'"; \
         } | tee /usr/local/etc/php/conf.d/timezone.ini \
         && { \
-                echo "memory_limit = '512M'"; \
+                echo "memory_limit = '256'"; \
         } | tee /usr/local/etc/php/conf.d/memorylimit.ini \
+        && { \
+                echo "display_errors = off"; \
+                echo "error_reporting = E_ALL"; \
+                echo "log_errors = on"; \
+        } | tee /usr/local/etc/php/conf.d/error.ini \
